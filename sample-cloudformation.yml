@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "my first cloud formation templete"
+Resources:
+  MyFirstS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "sample-aws-s3-bucket001"
+  MySampleEC2Instances:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-01bc990364452ab3e"
+      InstanceType: "t3.micro"
