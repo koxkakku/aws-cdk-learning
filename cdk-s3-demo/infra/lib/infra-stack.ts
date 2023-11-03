@@ -20,6 +20,7 @@ export class InfraStack extends cdk.Stack {
       versioned: true,
       bucketName: 'sample-infra-bucket',
       publicReadAccess: false,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
   }
 }
