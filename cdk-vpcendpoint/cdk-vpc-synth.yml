@@ -1,0 +1,134 @@
+Resources:
+  k0xdemovpceSecurityGroup0BBC12B4:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: CdkVpcendpointStack/k0x-demo-vpce/SecurityGroup
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow all outbound traffic by default
+          IpProtocol: "-1"
+      SecurityGroupIngress:
+        - CidrIp: 10.0.0.0/16
+          Description: from 10.0.0.0/16:443
+          FromPort: 443
+          IpProtocol: tcp
+          ToPort: 443
+      VpcId: vpc-0c52e2c30be598770
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/k0x-demo-vpce/SecurityGroup/Resource
+  k0xdemovpceD81B0B6F:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+        - Fn::GetAtt:
+            - k0xdemovpceSecurityGroup0BBC12B4
+            - GroupId
+      ServiceName: com.amazonaws.us-east-1.s3
+      SubnetIds:
+        - subnet-0b989d875fa625cd3
+        - subnet-0b5b96f3a6f8f98e9
+      VpcEndpointType: Interface
+      VpcId: vpc-0c52e2c30be598770
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/k0x-demo-vpce/Resource
+  k0xdemovpcesgBD53692D:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: CdkVpcendpointStack/k0x-demo-vpce-sg
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow all outbound traffic by default
+          IpProtocol: "-1"
+      SecurityGroupIngress:
+        - CidrIp: 10.0.0.0/16
+          Description: from 10.0.0.0/16:443
+          FromPort: 443
+          IpProtocol: tcp
+          ToPort: 443
+        - CidrIp: 10.0.0.0/16
+          Description: from 10.0.0.0/16:7999
+          FromPort: 7999
+          IpProtocol: tcp
+          ToPort: 7999
+      VpcId: vpc-0c52e2c30be598770
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/k0x-demo-vpce-sg/Resource
+  AbcHostedZoneD7C0494B:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: abc.com.
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/AbcHostedZone/Resource
+  XyzHostedZone3A185070:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: xyz.com.
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/XyzHostedZone/Resource
+  QweAbcRecord39D6D95D:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      AliasTarget:
+        DNSName:
+          Fn::Select:
+            - 1
+            - Fn::Split:
+                - ":"
+                - Fn::Select:
+                    - 0
+                    - Fn::GetAtt:
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+        HostedZoneId:
+          Fn::Select:
+            - 0
+            - Fn::Split:
+                - ":"
+                - Fn::Select:
+                    - 0
+                    - Fn::GetAtt:
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+      HostedZoneId:
+        Ref: AbcHostedZoneD7C0494B
+      Name: qwe.abc.com.
+      Type: A
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/QweAbcRecord/Resource
+  RtyXyzRecord1AB6BBDE:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      AliasTarget:
+        DNSName:
+          Fn::Select:
+            - 1
+            - Fn::Split:
+                - ":"
+                - Fn::Select:
+                    - 0
+                    - Fn::GetAtt:
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+        HostedZoneId:
+          Fn::Select:
+            - 0
+            - Fn::Split:
+                - ":"
+                - Fn::Select:
+                    - 0
+                    - Fn::GetAtt:
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+      HostedZoneId:
+        Ref: XyzHostedZone3A185070
+      Name: rty.xyz.com.
+      Type: A
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/RtyXyzRecord/Resource
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAA/2WOzQrCMBCEn6X3NPYHH0CKqLfSQg9epG62GFuTkmyQEvLutgRB8DQz38xhCp7nGc+S/m1TEGM6yTv3LfUwsgatdgaQrd3NIxTcXxShGXrAboajErOWiliL4Iyk5WS0m1k1qD/Q1dV3HdgKCfcl92dtCcVVK9w2P+nQIGgjNhpdixRCjPFSYPVCD6125Xqfl8nTSpkap0i+kDdRP0scEPHaAAAA
+    Metadata:
+      aws:cdk:path: CdkVpcendpointStack/CDKMetadata/Default

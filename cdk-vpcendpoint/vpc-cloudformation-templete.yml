@@ -1,0 +1,197 @@
+Resources:
+  k0xdemovpcesgBD53692D:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: CdkVpcendpointStack/k0x-demo-vpce-sg
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow all outbound traffic by default
+          IpProtocol: '-1'
+      SecurityGroupIngress:
+        - CidrIp: 10.0.0.0/16
+          Description: 'from 10.0.0.0/16:443'
+          FromPort: 443
+          IpProtocol: tcp
+          ToPort: 443
+        - CidrIp: 10.0.0.0/16
+          Description: 'from 10.0.0.0/16:7999'
+          FromPort: 7999
+          IpProtocol: tcp
+          ToPort: 7999
+      VpcId: vpc-0c52e2c30be598770
+    Metadata:
+      'aws:cdk:path': CdkVpcendpointStack/k0x-demo-vpce-sg/Resource
+      'AWS::CloudFormation::Designer':
+        id: fb6bb5cb-9710-43b3-9366-ed14da6fa9b9
+  k0xdemovpceD81B0B6F:
+    Type: 'AWS::EC2::VPCEndpoint'
+    Properties:
+      PrivateDnsEnabled: false
+      SecurityGroupIds:
+        - 'Fn::GetAtt':
+            - k0xdemovpcesgBD53692D
+            - GroupId
+      ServiceName: com.amazonaws.us-east-1.s3
+      SubnetIds:
+        - subnet-0b989d875fa625cd3
+        - subnet-0b5b96f3a6f8f98e9
+      VpcEndpointType: Interface
+      VpcId: vpc-0c52e2c30be598770
+    Metadata:
+      'aws:cdk:path': CdkVpcendpointStack/k0x-demo-vpce/Resource
+      'AWS::CloudFormation::Designer':
+        id: 585d0ad7-c65f-46c5-8f65-3bfffdc3db9f
+  AbcHostedZoneD7C0494B:
+    Type: 'AWS::Route53::HostedZone'
+    Properties:
+      Name: abc.com.
+    Metadata:
+      'aws:cdk:path': CdkVpcendpointStack/AbcHostedZone/Resource
+      'AWS::CloudFormation::Designer':
+        id: 00581bcc-9925-42e0-b1a5-09a8c4f2d47f
+  XyzHostedZone3A185070:
+    Type: 'AWS::Route53::HostedZone'
+    Properties:
+      Name: xyz.com.
+    Metadata:
+      'aws:cdk:path': CdkVpcendpointStack/XyzHostedZone/Resource
+      'AWS::CloudFormation::Designer':
+        id: 329e837a-48f0-4ff2-ad6e-520e4fb72606
+  QweAbcRecord39D6D95D:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName:
+          'Fn::Select':
+            - 1
+            - 'Fn::Split':
+                - ':'
+                - 'Fn::Select':
+                    - 0
+                    - 'Fn::GetAtt':
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+        HostedZoneId:
+          'Fn::Select':
+            - 0
+            - 'Fn::Split':
+                - ':'
+                - 'Fn::Select':
+                    - 0
+                    - 'Fn::GetAtt':
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+      HostedZoneId:
+        Ref: AbcHostedZoneD7C0494B
+      Name: qwe.abc.com.
+      Type: A
+    Metadata:
+      'aws:cdk:path': CdkVpcendpointStack/QweAbcRecord/Resource
+      'AWS::CloudFormation::Designer':
+        id: 5ec325fd-b8ec-405c-a34e-0477858cb6f4
+  RtyXyzRecord1AB6BBDE:
+    Type: 'AWS::Route53::RecordSet'
+    Properties:
+      AliasTarget:
+        DNSName:
+          'Fn::Select':
+            - 1
+            - 'Fn::Split':
+                - ':'
+                - 'Fn::Select':
+                    - 0
+                    - 'Fn::GetAtt':
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+        HostedZoneId:
+          'Fn::Select':
+            - 0
+            - 'Fn::Split':
+                - ':'
+                - 'Fn::Select':
+                    - 0
+                    - 'Fn::GetAtt':
+                        - k0xdemovpceD81B0B6F
+                        - DnsEntries
+      HostedZoneId:
+        Ref: XyzHostedZone3A185070
+      Name: rty.xyz.com.
+      Type: A
+    Metadata:
+      'aws:cdk:path': CdkVpcendpointStack/RtyXyzRecord/Resource
+      'AWS::CloudFormation::Designer':
+        id: 8805e482-d09f-40d7-a2b1-d6eac2ab97ae
+  CDKMetadata:
+    Type: 'AWS::CDK::Metadata'
+    Properties:
+      Analytics: >-
+        v2:deflate64:H4sIAAAAAAAA/1WOywrCMBBFv6X7NPaBHyBF1F1poQs3UidTjK1JSSZIKfl3U4Kgq5lz71ncgud5xrOkf9sUxJhO8s7XlnoYWYNWOwPIQndbEYpQIDgjaTkZ7WZWDeo/uChCM/SA3QxHJWYtFW1WV1df9CyYhPuSr2dtCcVVK9ycHzo0CNqILY1fi+R9xDjJs3qhh1a7MsznZfK0UqbGKZIv5E28H8qyuQraAAAA
+    Metadata:
+      'aws:cdk:path': CdkVpcendpointStack/CDKMetadata/Default
+      'AWS::CloudFormation::Designer':
+        id: a60d5a2b-d288-4582-8ec8-67cc38685dfc
+Metadata:
+  'AWS::CloudFormation::Designer':
+    a60d5a2b-d288-4582-8ec8-67cc38685dfc:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 60
+        'y': 300
+      z: 1
+      embeds: []
+    329e837a-48f0-4ff2-ad6e-520e4fb72606:
+      size:
+        width: 150
+        height: 150
+      position:
+        x: 440
+        'y': -10
+      z: 1
+      embeds: []
+    00581bcc-9925-42e0-b1a5-09a8c4f2d47f:
+      size:
+        width: 150
+        height: 150
+      position:
+        x: -10
+        'y': 0
+      z: 1
+      embeds: []
+    fb6bb5cb-9710-43b3-9366-ed14da6fa9b9:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 180
+        'y': 300
+      z: 1
+      embeds: []
+    585d0ad7-c65f-46c5-8f65-3bfffdc3db9f:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 300
+        'y': 300
+      z: 1
+      embeds: []
+    8805e482-d09f-40d7-a2b1-d6eac2ab97ae:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 490
+        'y': 300
+      z: 1
+      embeds: []
+    5ec325fd-b8ec-405c-a34e-0477858cb6f4:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 300
+        'y': 40
+      z: 1
+      embeds: []
