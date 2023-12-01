@@ -1,0 +1,5 @@
+C:\Users\skumard\Documents\cdk-vpcendpoint-2310\vpce-app\vpce-app\src\VpceApp\obj\Debug\net6.0\VpceApp.csproj.AssemblyReference.cache
+C:\Users\skumard\Documents\cdk-vpcendpoint-2310\vpce-app\vpce-app\src\VpceApp\obj\Debug\net6.0\VpceApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\skumard\Documents\cdk-vpcendpoint-2310\vpce-app\vpce-app\src\VpceApp\obj\Debug\net6.0\VpceApp.AssemblyInfoInputs.cache
+C:\Users\skumard\Documents\cdk-vpcendpoint-2310\vpce-app\vpce-app\src\VpceApp\obj\Debug\net6.0\VpceApp.AssemblyInfo.cs
+C:\Users\skumard\Documents\cdk-vpcendpoint-2310\vpce-app\vpce-app\src\VpceApp\obj\Debug\net6.0\VpceApp.csproj.CoreCompileInputs.cache
