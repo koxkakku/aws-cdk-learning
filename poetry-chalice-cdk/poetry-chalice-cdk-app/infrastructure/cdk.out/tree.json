@@ -1,0 +1,625 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "poetry-chalice-cdk-app": {
+        "id": "poetry-chalice-cdk-app",
+        "path": "poetry-chalice-cdk-app",
+        "children": {
+          "Poetry_Chalice_CDK_DDB": {
+            "id": "Poetry_Chalice_CDK_DDB",
+            "path": "poetry-chalice-cdk-app/Poetry_Chalice_CDK_DDB",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "poetry-chalice-cdk-app/Poetry_Chalice_CDK_DDB/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "PK",
+                        "attributeType": "S"
+                      },
+                      {
+                        "attributeName": "SK",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "keySchema": [
+                      {
+                        "attributeName": "PK",
+                        "keyType": "HASH"
+                      },
+                      {
+                        "attributeName": "SK",
+                        "keyType": "RANGE"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.114.1"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "poetry-chalice-cdk-app/Poetry_Chalice_CDK_DDB/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.114.1"
+            }
+          },
+          "Poetry_Chalice_CDK_DDB_Table": {
+            "id": "Poetry_Chalice_CDK_DDB_Table",
+            "path": "poetry-chalice-cdk-app/Poetry_Chalice_CDK_DDB_Table",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.114.1"
+            }
+          },
+          "Poetry_Chalice_App": {
+            "id": "Poetry_Chalice_App",
+            "path": "poetry-chalice-cdk-app/Poetry_Chalice_App",
+            "children": {
+              "ChaliceAppCode": {
+                "id": "ChaliceAppCode",
+                "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceAppCode",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceAppCode/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceAppCode/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.114.1"
+                }
+              },
+              "ChaliceApp": {
+                "id": "ChaliceApp",
+                "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp",
+                "children": {
+                  "$Mappings": {
+                    "id": "$Mappings",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Mappings",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
+                  "$Conditions": {
+                    "id": "$Conditions",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Conditions",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
+                  "$Rules": {
+                    "id": "$Rules",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Rules",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
+                  "DefaultRole": {
+                    "id": "DefaultRole",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/DefaultRole",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Version": "2012-10-17",
+                          "Statement": [
+                            {
+                              "Sid": "",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              },
+                              "Action": "sts:AssumeRole"
+                            }
+                          ]
+                        },
+                        "policies": [
+                          {
+                            "policyDocument": {
+                              "Version": "2012-10-17",
+                              "Statement": [
+                                {
+                                  "Effect": "Allow",
+                                  "Action": [
+                                    "logs:CreateLogGroup",
+                                    "logs:CreateLogStream",
+                                    "logs:PutLogEvents"
+                                  ],
+                                  "Resource": "arn:*:logs:*:*:*"
+                                }
+                              ]
+                            },
+                            "policyName": "DefaultRolePolicy"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "APIHandler": {
+                    "id": "APIHandler",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/APIHandler",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Serverless::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "codeUri": {
+                          "bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "key": "ac9da76365873d5474754aeca6b62ddbf3fd99751ea0ad57ba881addb16acb25.zip"
+                        },
+                        "environment": {
+                          "variables": {
+                            "APP_TABLE_NAME": {
+                              "Ref": "PoetryChaliceCDKDDB3F69D2E7"
+                            }
+                          }
+                        },
+                        "handler": "app.app",
+                        "memorySize": 128,
+                        "role": {
+                          "Fn::GetAtt": [
+                            "DefaultRole",
+                            "Arn"
+                          ]
+                        },
+                        "runtime": "python3.10",
+                        "tags": {
+                          "aws-chalice": "version=1.29.0:stage=poetry-chalice-cdk-app:app=poetry-chalice-cdk-app"
+                        },
+                        "timeout": 60,
+                        "tracing": "PassThrough"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_sam.CfnFunction",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "RestAPI": {
+                    "id": "RestAPI",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/RestAPI",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Serverless::Api",
+                      "aws:cdk:cloudformation:props": {
+                        "definitionBody": {
+                          "swagger": "2.0",
+                          "info": {
+                            "version": "1.0",
+                            "title": "poetry-chalice-cdk-app"
+                          },
+                          "schemes": [
+                            "https"
+                          ],
+                          "paths": {
+                            "/users": {
+                              "post": {
+                                "consumes": [
+                                  "application/json"
+                                ],
+                                "produces": [
+                                  "application/json"
+                                ],
+                                "responses": {
+                                  "200": {
+                                    "description": "200 response",
+                                    "schema": {
+                                      "$ref": "#/definitions/Empty"
+                                    }
+                                  }
+                                },
+                                "x-amazon-apigateway-integration": {
+                                  "responses": {
+                                    "default": {
+                                      "statusCode": "200"
+                                    }
+                                  },
+                                  "uri": {
+                                    "Fn::Sub": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${APIHandler.Arn}/invocations"
+                                  },
+                                  "passthroughBehavior": "when_no_match",
+                                  "httpMethod": "POST",
+                                  "contentHandling": "CONVERT_TO_TEXT",
+                                  "type": "aws_proxy"
+                                }
+                              }
+                            },
+                            "/users/{username}": {
+                              "get": {
+                                "consumes": [
+                                  "application/json"
+                                ],
+                                "produces": [
+                                  "application/json"
+                                ],
+                                "responses": {
+                                  "200": {
+                                    "description": "200 response",
+                                    "schema": {
+                                      "$ref": "#/definitions/Empty"
+                                    }
+                                  }
+                                },
+                                "x-amazon-apigateway-integration": {
+                                  "responses": {
+                                    "default": {
+                                      "statusCode": "200"
+                                    }
+                                  },
+                                  "uri": {
+                                    "Fn::Sub": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${APIHandler.Arn}/invocations"
+                                  },
+                                  "passthroughBehavior": "when_no_match",
+                                  "httpMethod": "POST",
+                                  "contentHandling": "CONVERT_TO_TEXT",
+                                  "type": "aws_proxy"
+                                },
+                                "parameters": [
+                                  {
+                                    "name": "username",
+                                    "in": "path",
+                                    "required": true,
+                                    "type": "string"
+                                  }
+                                ]
+                              },
+                              "put": {
+                                "consumes": [
+                                  "application/json"
+                                ],
+                                "produces": [
+                                  "application/json"
+                                ],
+                                "responses": {
+                                  "200": {
+                                    "description": "200 response",
+                                    "schema": {
+                                      "$ref": "#/definitions/Empty"
+                                    }
+                                  }
+                                },
+                                "x-amazon-apigateway-integration": {
+                                  "responses": {
+                                    "default": {
+                                      "statusCode": "200"
+                                    }
+                                  },
+                                  "uri": {
+                                    "Fn::Sub": "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${APIHandler.Arn}/invocations"
+                                  },
+                                  "passthroughBehavior": "when_no_match",
+                                  "httpMethod": "POST",
+                                  "contentHandling": "CONVERT_TO_TEXT",
+                                  "type": "aws_proxy"
+                                },
+                                "parameters": [
+                                  {
+                                    "name": "username",
+                                    "in": "path",
+                                    "required": true,
+                                    "type": "string"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "definitions": {
+                            "Empty": {
+                              "type": "object",
+                              "title": "Empty Schema"
+                            }
+                          },
+                          "x-amazon-apigateway-binary-media-types": [
+                            "application/octet-stream",
+                            "application/x-tar",
+                            "application/zip",
+                            "audio/basic",
+                            "audio/ogg",
+                            "audio/mp4",
+                            "audio/mpeg",
+                            "audio/wav",
+                            "audio/webm",
+                            "image/png",
+                            "image/jpg",
+                            "image/jpeg",
+                            "image/gif",
+                            "video/ogg",
+                            "video/mpeg",
+                            "video/webm"
+                          ]
+                        },
+                        "endpointConfiguration": "EDGE",
+                        "stageName": "api"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_sam.CfnApi",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "APIHandlerInvokePermission": {
+                    "id": "APIHandlerInvokePermission",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/APIHandlerInvokePermission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Ref": "APIHandler"
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Sub": [
+                            "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${RestAPIId}/*",
+                            {
+                              "RestAPIId": {
+                                "Ref": "RestAPI"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.114.1"
+                    }
+                  },
+                  "$Hooks": {
+                    "id": "$Hooks",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Hooks",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  },
+                  "$Ouputs": {
+                    "id": "$Ouputs",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs",
+                    "children": {
+                      "RestAPIId": {
+                        "id": "RestAPIId",
+                        "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/RestAPIId",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnOutput",
+                          "version": "2.114.1"
+                        }
+                      },
+                      "APIHandlerName": {
+                        "id": "APIHandlerName",
+                        "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/APIHandlerName",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnOutput",
+                          "version": "2.114.1"
+                        }
+                      },
+                      "APIHandlerArn": {
+                        "id": "APIHandlerArn",
+                        "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/APIHandlerArn",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnOutput",
+                          "version": "2.114.1"
+                        }
+                      },
+                      "EndpointURL": {
+                        "id": "EndpointURL",
+                        "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/EndpointURL",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnOutput",
+                          "version": "2.114.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.3.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.cloudformation_include.CfnInclude",
+                  "version": "2.114.1"
+                }
+              },
+              "DefaultRole": {
+                "id": "DefaultRole",
+                "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/DefaultRole",
+                "children": {
+                  "Policy": {
+                    "id": "Policy",
+                    "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/DefaultRole/Policy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "poetry-chalice-cdk-app/Poetry_Chalice_App/DefaultRole/Policy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "dynamodb:BatchGetItem",
+                                    "dynamodb:GetRecords",
+                                    "dynamodb:GetShardIterator",
+                                    "dynamodb:Query",
+                                    "dynamodb:GetItem",
+                                    "dynamodb:Scan",
+                                    "dynamodb:ConditionCheckItem",
+                                    "dynamodb:BatchWriteItem",
+                                    "dynamodb:PutItem",
+                                    "dynamodb:UpdateItem",
+                                    "dynamodb:DeleteItem",
+                                    "dynamodb:DescribeTable"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "PoetryChaliceCDKDDB3F69D2E7",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Ref": "AWS::NoValue"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "PoetryChaliceAppDefaultRolePolicy951FAE4F",
+                            "roles": [
+                              {
+                                "Fn::Select": [
+                                  1,
+                                  {
+                                    "Fn::Split": [
+                                      "/",
+                                      {
+                                        "Fn::Select": [
+                                          5,
+                                          {
+                                            "Fn::Split": [
+                                              ":",
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "DefaultRole",
+                                                  "Arn"
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.114.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.114.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "poetry-chalice-cdk-app/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "poetry-chalice-cdk-app/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.114.1"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "poetry-chalice-cdk-app/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.114.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "poetry-chalice-cdk-app/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.114.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "poetry-chalice-cdk-app/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.114.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.114.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.114.1"
+    }
+  }
+}

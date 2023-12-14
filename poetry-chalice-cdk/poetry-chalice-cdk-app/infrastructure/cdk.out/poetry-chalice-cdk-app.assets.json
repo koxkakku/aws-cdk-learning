@@ -1,0 +1,32 @@
+{
+  "version": "35.0.0",
+  "files": {
+    "ac9da76365873d5474754aeca6b62ddbf3fd99751ea0ad57ba881addb16acb25": {
+      "source": {
+        "path": "asset.ac9da76365873d5474754aeca6b62ddbf3fd99751ea0ad57ba881addb16acb25.zip",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "ac9da76365873d5474754aeca6b62ddbf3fd99751ea0ad57ba881addb16acb25.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "e5fa81226afd166238be0f43766d392772e0b7ac17f7243b459bab7defc9d426": {
+      "source": {
+        "path": "poetry-chalice-cdk-app.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "e5fa81226afd166238be0f43766d392772e0b7ac17f7243b459bab7defc9d426.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

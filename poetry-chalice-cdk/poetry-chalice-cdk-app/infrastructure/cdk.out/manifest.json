@@ -1,0 +1,143 @@
+{
+  "version": "35.0.0",
+  "artifacts": {
+    "poetry-chalice-cdk-app.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "poetry-chalice-cdk-app.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "poetry-chalice-cdk-app": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "poetry-chalice-cdk-app.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e5fa81226afd166238be0f43766d392772e0b7ac17f7243b459bab7defc9d426.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "poetry-chalice-cdk-app.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "poetry-chalice-cdk-app.assets"
+      ],
+      "metadata": {
+        "/poetry-chalice-cdk-app/Poetry_Chalice_CDK_DDB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PoetryChaliceCDKDDB3F69D2E7"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_CDK_DDB_Table": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PoetryChaliceCDKDDBTable"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PoetryChaliceAppChaliceAppA2E1AE38"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/DefaultRole": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DefaultRole"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/APIHandler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "APIHandler"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/RestAPI": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RestAPI"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/APIHandlerInvokePermission": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "APIHandlerInvokePermission"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/RestAPIId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RestAPIId"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/APIHandlerName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "APIHandlerName"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/APIHandlerArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "APIHandlerArn"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/ChaliceApp/$Ouputs/EndpointURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "EndpointURL"
+          }
+        ],
+        "/poetry-chalice-cdk-app/Poetry_Chalice_App/DefaultRole/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PoetryChaliceAppDefaultRolePolicy951FAE4F"
+          }
+        ],
+        "/poetry-chalice-cdk-app/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/poetry-chalice-cdk-app/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/poetry-chalice-cdk-app/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/poetry-chalice-cdk-app/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "poetry-chalice-cdk-app"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

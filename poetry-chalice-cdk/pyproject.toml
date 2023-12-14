@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "poetry-chalice-cdk"
+version = "0.1.0"
+description = ""
+authors = ["Sharad Kumar Dutta <sharad.k.dutta@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+chalice = {extras = ["cdkv2"], version = "^1.29.0"}
+boto3 = "^1.34.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
