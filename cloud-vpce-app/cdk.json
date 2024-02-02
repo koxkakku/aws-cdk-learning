@@ -72,12 +72,12 @@
       },
       "route53Config": [
         {
-          "hostedZone": "Mercedes-benz.com",
-          "dnsARecords" : ["abc.Mercedes-benz.com"]
+          "hostedZone": "websitea.com",
+          "dnsARecords" : ["abc.websitea.com"]
         },
         {
-          "hostedZone": "Diamler.com",
-          "dnsARecords" : ["xyz.Diamler.com"]
+          "hostedZone": "websiteb.com",
+          "dnsARecords" : ["xyz.websiteb.com"]
         }
       ]
     }
